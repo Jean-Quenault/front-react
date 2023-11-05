@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # Buid won't be add in the commit
-.build/
+build
