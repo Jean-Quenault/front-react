@@ -38,7 +38,7 @@ pipeline {
             echo 'Post-execution cleanup...'
             // Here, delete the cloned sources from the Git repository
             sh "rm -rf ${WORKSPACE}/*"
-            // You might also want to delete the created Docker image
+            // May be want to delete the created Docker image
             // sh "docker rmi ${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
         }
     }

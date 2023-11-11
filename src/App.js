@@ -6,7 +6,7 @@ function App() {
   const [browser, setBrowser] = useState('');
 
   useEffect(() => {
-    // Obtenez l'adresse IP en utilisant une requête à un service tiers
+    // Get the IP address using a request to a third-party service
     fetch('https://api.ipify.org?format=json')
       .then((response) => response.json())
       .then((data) => {
@@ -16,7 +16,8 @@ function App() {
         console.error('Erreur lors de la récupération de l\'adresse IP : ', error);
       });
 
-    // Obtenez des informations sur le système d'exploitation et le navigateur
+    // Get operating system and browser information
+
     setOs(navigator.platform);
     setBrowser(navigator.userAgent);
   }, []);
