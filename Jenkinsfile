@@ -4,6 +4,8 @@ pipeline {
     environment {
         // Define the variable for the Docker image
         DOCKER_IMAGE = "front"
+        REACT_APP_API_URL = "backend.jeanops.net"
+
     }
 
     stages {
@@ -12,14 +14,15 @@ pipeline {
                 // Add GitHub as known host
                 sh 'ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts'
                 // Clone the specific Git repository
-                sh 'git clone git@github.com:Jean-Quenault/front-react.git'
+                git branch: 'main', credentialsId: 'Token', url: 'https://github.com/Jean-Quenault/front-react'
+                // sh 'git clone git@github.com:Jean-Quenault/front-react.git'
             }
         }
         stage('Build') {
             steps {
                 // Build the Docker image with the tag corresponding to the build number
-                sh "ls"
-                sh "cd front-react && docker build -t ${DOCKER_IMAGE}:${env.BUILD_NUMBER} ."
+                sh "echo 'REACT_APP_SERVER_URL=${REACT_APP_API_URL}' > .env.production"
+                sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_NUMBER} ."
             }
         }
         stage('Run') {
