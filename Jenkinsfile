@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         /* Definir les variables d'environnement nécessaires */
-        REGISTRY_URL = '980377181750.dkr.ecr.eu-west-3.amazonaws.com/registry-proj-dockerbuild'
+        REGISTRY_URL = '980377181750.dkr.ecr.eu-west-3.amazonaws.com/front'
         IMAGE_TAG = "${env.BUILD_ID}" /* Pour un tag unique par build*/
         AWS_DEFAULT_REGION = 'eu-west-3'
         REACT_APP_API_URL = "backend.jeanops.net"
