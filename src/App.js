@@ -28,7 +28,7 @@ function App() {
   // Add the user's informations to the database, by a POST request to the back
 
   const handleSubmit = () => {
-    fetch(`${serverUrl}/users`, {
+    fetch(`${serverUrl}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch(`${serverUrl}/users`)
+    fetch(`${serverUrl}/`)
       .then(response => response.json())
       .then(data => {
         setUsers(data);
