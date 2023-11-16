@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-// 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
+
 
 function App() {
   const [ip, setIp] = useState('');
@@ -28,7 +28,7 @@ function App() {
   // Add the user's informations to the database, by a POST request to the back
 
   const handleSubmit = () => {
-    fetch(`${serverUrl}/`, {
+    fetch(`${serverUrl}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch(`${serverUrl}/`)
+    fetch(`${serverUrl}/users`)
       .then(response => response.json())
       .then(data => {
         setUsers(data);
