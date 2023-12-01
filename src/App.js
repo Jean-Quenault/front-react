@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
-
 function App() {
   const [ip, setIp] = useState('');
   const [os, setOs] = useState('');
   const [browser, setBrowser] = useState('');
 
+
+// Get the IP address using a request to api.ipify.org, operating system and browser information
   useEffect(() => {
-    // Get the IP address using a request to a third-party service
     fetch('https://api.ipify.org?format=json')
       .then((response) => response.json())
       .then((data) => {
@@ -18,15 +18,11 @@ function App() {
       .catch((error) => {
         console.error('Erreur lors de la récupération de l\'adresse IP : ', error);
       });
-
-    // Get operating system and browser information
-
     setOs(navigator.platform);
     setBrowser(navigator.userAgent);
   }, []);
 
   // Add the user's informations to the database, by a POST request to the back
-
   const handleSubmit = () => {
     fetch(`${serverUrl}/users`, {
       method: 'POST',
@@ -50,10 +46,10 @@ function App() {
     });
   };
 
-  // Show all informations from the database, by a GET request to the back
-
   const [users, setUsers] = useState([]);
 
+
+  // Show all informations from the database
   useEffect(() => {
     fetch(`${serverUrl}/users`)
       .then(response => response.json())
@@ -63,7 +59,7 @@ function App() {
       .catch(error => console.error('Erreur:', error));
   }, []);
   
-
+  // Show the informartions of the user and of all users, with a button to send the user's informations to the database
   return (
     <div>
       <h1>Informations sur votre ordinateur</h1>
