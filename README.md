@@ -10,6 +10,8 @@ L'application sera build, son image Docker sera envoyé vers un registry AWS dan
 - Jenkins
 - Deux noeuds EC2 Amazon Linux AWS
 - Un registry AWS
+- Un back Express
+- Une base de données
 
 ## Installation et Configuration
 
@@ -17,7 +19,7 @@ L'application sera build, son image Docker sera envoyé vers un registry AWS dan
 
  - https://github.com/Jean-Quenault/front-react/tree/main
 
-2. ** Définition des variables d'environnement**
+2. **Définition des variables d'environnement**
 
  - Créez en fonction du besoin un fichier .env.development ou .env.production
  - Définissez vos variables
