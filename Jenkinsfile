@@ -7,7 +7,7 @@ pipeline {
         // For a single tag per build
         IMAGE_TAG = "${env.BUILD_ID}"
         AWS_DEFAULT_REGION = 'eu-west-3'
-        REACT_APP_API_URL = "https://backend.jeanops.net"
+        REACT_APP_API_URL = "https://hmyh9m6bkf.execute-api.eu-west-3.amazonaws.com/prod"
     }
 
 
