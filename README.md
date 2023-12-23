@@ -1,64 +1,51 @@
-# Projet Front Node.js
 
-Ce projet affiche l'adresse IP, le système d'exploitation, et le navigateur internet de l'utilisateur. Il permet également l'affichage du conetenu d'une base de données comportant ces informations pour tous les utilisateurs. Le site permet aussi une fonctionnalité pour envoyer les informations de l'utilisateur vers la base de données via un bouton.
+# Front Node
 
-L'application sera build, son image Docker sera envoyé vers un registry AWS dans le but de faciliter un déploiement scalable (avec autoscaling group).
+This project displays the user's IP address, operating system, and internet browser. It also allows the display of the contents of a database containing this information for all users. The site also provides a feature to send user information to the database via a button.
 
-## Prérequis
+The application will be built, and its Docker image will be sent to an AWS registry to facilitate scalable deployment (with an autoscaling group).
+
+## Prerequisites
 
 - Docker
 - Jenkins
-- Deux noeuds EC2 Amazon Linux AWS
-- Un registry AWS
-- Un back Express
-- Une base de données
+- Two Amazon Linux AWS EC2 nodes
+- An AWS registry
+- An Express back-end
+- A database
 
-## Installation et Configuration
+## Installation and Configuration
 
-1. **Cloner le dépôt :**
+1. **Clone the repository:**
 
  - https://github.com/Jean-Quenault/front-react/tree/main
 
-2. **Définition des variables d'environnement**
+2. **Environment Variable Definition**
 
- - Créez en fonction du besoin un fichier .env.development ou .env.production
- - Définissez vos variables
+ - Create a .env.development or .env.production file as needed
+ - Define your variables
 
-3. **Configurer Jenkins :**
-- Assurez-vous que Jenkins est installé et configuré sur votre serveur.
-- Créer et configurer votre noeud.
-- Modifier le Jenkinsfile avec votre registry AWS.
-- Utilisez le `Jenkinsfile` fourni dans le dépôt pour configurer votre pipeline.
-- Lancer le pipeline. L'image de l'application web est désormais sur le registry.
+3. **Configure Jenkins:**
+- Ensure Jenkins is installed and configured on your server.
+- Create and configure your node.
+- Modify the Jenkinsfile with your AWS registry.
+- Use the `Jenkinsfile` provided in the repository to configure your pipeline.
+- Launch the pipeline. The web application image is now on the registry.
 
-4. **Déploiement avec Docker :**
-- Sur votre noeud EC2, exécutez les commandes suivantes pour s'authentifier auprès du registry, pour push l'image, la construire et lancer le conteneur Docker :
+4. **Deployment with Docker:**
+- On your EC2 node, execute the following commands to authenticate with the registry, push the image, build and launch the Docker container:
   ```
-  aws ecr get-login-password --region votre_region | docker login --username AWS --password-stdin votre_id_aws.dkr.ecr.votre_region.amazonaws.com
-  docker pull votre_id_aws.dkr.ecr.votre_region.amazonaws.com/nom_repo_ecr:tag
-  docker run -p port_local:port_container votre_id_aws.dkr.ecr.votre_region.amazonaws.com/nom_repo_ecr:tag
-
+  aws ecr get-login-password --region your_region | docker login --username AWS --password-stdin your_aws_id.dkr.ecr.your_region.amazonaws.com
+  docker pull your_aws_id.dkr.ecr.your_region.amazonaws.com/ecr_repo_name:tag
+  docker run -p local_port:container_port your_aws_id.dkr.ecr.your_region.amazonaws.com/ecr_repo_name:tag
   ```
 
-## Utilisation
+## Usage
 
-- Ouvrez votre navigateur et accédez à `http://[adresse_IP_du_noeud_EC2]`.
-- Vous verrez vos informations (IP, OS, navigateur) affichées.
-- Utilisez le bouton fourni pour envoyer vos informations à la base de données.
+- Open your browser and access `http://[EC2_node_IP_address]`.
+- You will see your information (IP, OS, browser) displayed.
+- Use the provided button to send your information to the database.
 
+## Acknowledgements
 
-## Contribution
-
-Si vous souhaitez contribuer à ce projet, veuillez contacter Jean.
-
-## Licence
-
-Ce projet est privé.
-
-## Contact
-
-Pour toute question ou aide, veuillez contacter Jean.
-
-## Remerciements
-
-Merci à Armen Avdoyan.
+Thanks to Armen Avdoyan.
