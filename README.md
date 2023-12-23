@@ -1,70 +1,51 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Front Node
 
-## Available Scripts
+This project displays the user's IP address, operating system, and internet browser. It also allows the display of the contents of a database containing this information for all users. The site also provides a feature to send user information to the database via a button.
 
-In the project directory, you can run:
+The application will be built, and its Docker image will be sent to an AWS registry to facilitate scalable deployment (with an autoscaling group).
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Docker
+- Jenkins
+- Two Amazon Linux AWS EC2 nodes
+- An AWS registry
+- An Express back-end
+- A database
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation and Configuration
 
-### `npm test`
+1. **Clone the repository:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ - https://github.com/Jean-Quenault/front-react/tree/main
 
-### `npm run build`
+2. **Environment Variable Definition**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ - Create a .env.development or .env.production file as needed
+ - Define your variables
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Configure Jenkins:**
+- Ensure Jenkins is installed and configured on your server.
+- Create and configure your node.
+- Modify the Jenkinsfile with your AWS registry.
+- Use the `Jenkinsfile` provided in the repository to configure your pipeline.
+- Launch the pipeline. The web application image is now on the registry.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Deployment with Docker:**
+- On your EC2 node, execute the following commands to authenticate with the registry, push the image, build and launch the Docker container:
+  ```
+  aws ecr get-login-password --region your_region | docker login --username AWS --password-stdin your_aws_id.dkr.ecr.your_region.amazonaws.com
+  docker pull your_aws_id.dkr.ecr.your_region.amazonaws.com/ecr_repo_name:tag
+  docker run -p local_port:container_port your_aws_id.dkr.ecr.your_region.amazonaws.com/ecr_repo_name:tag
+  ```
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Open your browser and access `http://[EC2_node_IP_address]`.
+- You will see your information (IP, OS, browser) displayed.
+- Use the provided button to send your information to the database.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Acknowledgements
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thanks to Armen Avdoyan.
